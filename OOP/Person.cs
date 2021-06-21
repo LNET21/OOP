@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,14 @@ using System.Threading.Tasks;
 
 namespace OOP
 {
-    class Person
+    class Person : IPerson
     {
         public string Name { get; set; }
+
+        public void Do()
+        {
+            Console.WriteLine("Doing");
+        }
     }
 
     class Employee  : Person
@@ -19,5 +25,25 @@ namespace OOP
     class Admin : Employee
     {
         public string Department { get; set; }
+    }
+
+    class Instructor : IPerson
+    {
+        public string Name { get; set; }
+
+        public void Do()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    class Dog : IPerson
+    {
+        public string Name { get; set; }
+
+        public void Do()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

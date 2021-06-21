@@ -10,6 +10,13 @@ namespace OOP
             Person pers2 = new Employee();
             Person pers3 = new Person();
             Admin admin = new();
+
+            IPerson instructor = new Instructor();
+            IPerson dog = new Dog();
+
+            instructor.Name = "Kalle";
+            dog.Name = "Fido";
+           
             
 
             pers.Name = "Nisse";
