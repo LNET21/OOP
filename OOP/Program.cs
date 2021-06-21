@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace OOP
 {
@@ -6,29 +7,25 @@ namespace OOP
     {
         static void Main(string[] args)
         {
-            //Person pers = new Admin();
-            //Person pers2 = new Employee();
-            //Person pers3 = new Person();
-            //Admin admin = new();
 
+            FuelVehicle fuelVehicle = new FuelVehicle("Volvo", "aaa333");
+            Vehicle vehicle = new Vehicle("Saab");
 
+            List<AbstractVehicle> vehicles = new List<AbstractVehicle>()
+            {
+                fuelVehicle, vehicle, new Vehicle("Mazda")
+            };
+            vehicles.Add(new Vehicle("Audi"));
+            vehicles.Add(new Bicycle());
 
-            //IPerson instructor = new Instructor();
-            //IPerson dog = new Dog();
+            foreach (AbstractVehicle v in vehicles)
+            {
+                Console.WriteLine(v.Drive(23));
+            }
 
+            //vehicles.ForEach(v => v.Drive(23));
+                
 
-
-            //instructor.Name = "Kalle";
-            //dog.Name = "Fido";
-
-
-
-            //pers.Name = "Nisse";
-            //pers2.Name = "Anna";
-            //Employee castad = (Employee)pers2;
-
-            FuelVehicle vehicle = new FuelVehicle("Volvo");
-            vehicle.Drive(23);
 
           
             
