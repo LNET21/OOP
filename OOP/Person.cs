@@ -33,7 +33,7 @@ namespace OOP
 
         public void Do()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Instrustor");
         }
     }
 
@@ -43,7 +43,7 @@ namespace OOP
 
         public void Do()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Dog");
         }
     }
 }
