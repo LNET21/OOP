@@ -8,6 +8,10 @@ namespace OOP
         static void Main(string[] args)
         {
 
+            FuelCar car = new FuelCar();
+
+            car.FuelLevel = 50;
+
             FuelVehicle fuelVehicle = new FuelVehicle("Volvo", "aaa333", 50);
             Vehicle vehicle = new Vehicle("Saab");
 

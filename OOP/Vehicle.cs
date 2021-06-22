@@ -16,7 +16,7 @@ namespace OOP
     {
         public virtual string Drive(double distance)
         {
-            return $"{this.GetType().Name} drove for {distance}";
+            return $"{this.GetType().Name} wants to drive for {distance}";
         }
 
         public abstract string Turn();
@@ -24,6 +24,7 @@ namespace OOP
 
    public class Vehicle : AbstractVehicle
     {
+        protected int someValue;
         public string Brand { get; set; }
         public string RegNo { get; set; }
 
@@ -37,6 +38,11 @@ namespace OOP
         {
             return "Vehicle turns";
         }
+
+        //public override string Drive(double distance)
+        //{
+        //    return base.Drive(distance);
+        //}
     }
 
     public class FuelVehicle : Vehicle
@@ -63,10 +69,46 @@ namespace OOP
             Fuelcapacity = fuelcapacity;
         }
 
+    }
 
-        //public override  string Drive(double distance)
+    public class FuelCar : FuelVehicle
+    {
+        private const double fuelConsumption = 0.5;
+        public double MaxDistance // => FuelLevel / fuelConsumption;
+        {
+            get
+            {
+                return FuelLevel / fuelConsumption;
+            }
+        }
+
+        public FuelCar() :  this("DefaultBrandName", 100, "XXX555") { }
+
+        public FuelCar(string brand, double fuelcapacity, string regno) : base(brand, regno, fuelcapacity){}
+
+        public override string Drive(double distance)
+        {
+            var result = new StringBuilder();
+
+            result.AppendLine(base.Drive(distance));
+
+            if(distance < 0)
+            {
+                distance = 0;
+                result.AppendLine("Negative distance is assumed to be 0");
+            }
+
+            //FuelLevel = FuelLevel - (distance * fuelConsumption);
+            FuelLevel -= distance * fuelConsumption;
+
+            result.AppendLine($"RegNo: {RegNo} drove {distance} km");
+
+            return result.ToString();
+        }
+
+        public string Sound()  => "Tut tut Greta!";
         //{
-        //    return base.Drive(distance);
+        //    return "Tut tut";
         //}
     }
 
