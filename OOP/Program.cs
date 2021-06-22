@@ -25,25 +25,32 @@ namespace OOP
 
             foreach (var v in vehicles)
             {
+                //Unsafe cast, Exception om inte casten lyckas
                 //FuelCar fuelCar = (FuelCar)v;
                 //Console.WriteLine(fuelCar.Brand);
                 //Console.WriteLine(fuelCar.Sound());
 
+                //Null om inte casten lyckas
                 FuelCar fuelCar1 = v as FuelCar;
                 if(fuelCar1 != null)
                 {
                     Console.WriteLine(fuelCar1.Sound());
                 }
 
+                //?. Nullcheck
                 Console.WriteLine(fuelCar1?.Sound());
 
-                if(v is FuelCar)
+                //Är instansen v en FuelCar?
+                if (v is FuelCar)
                 {
+                    //Unsafe cast Exception om den inte fungerar
                     FuelCar temp = (FuelCar)v;
                     Console.WriteLine(temp.Sound());
                 }
 
-                if(v is FuelCar temp2)
+                //Är instansen v en FuelCar?
+                //Om ja gör även en cast och tilldela resultatet tiil varibeln temp2
+                if (v is FuelCar temp2)
                 {
                     Console.WriteLine(temp2.Sound());
                 }

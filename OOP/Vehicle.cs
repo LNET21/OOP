@@ -6,50 +6,70 @@ using System.Threading.Tasks;
 
 namespace OOP
 {
-
- public interface IDrivable
+    //Interface
+    //En klass kan implementera (ärva) från många interface
+    //Allt är publikt
+    //(Med C# 8 kan vi har privata statiska medlemmar, samt privata metoder med default implemenation)
+    //Måste Implementeras i ärvda klasser
+    //(Kan ha implementation from c# 8)
+    //Kan inte implementeras - ej skapa objekt av med new
+    public interface IDrivable
     {
         string Drive(double distance);
     }
 
-  public abstract class AbstractVehicle : IDrivable
+    //Abstrakt
+    //Kan inte implementeras - ej skapa objekt av med new
+    //Kan inehålla en blandnig av vanliga metoder och abstrakta metoder utan implementation
+    //Alla abstrakta medlemmar måste implemneteras av dem som ärver från den abstrakta klassen
+    //Kan hålla privata fält
+    public abstract class AbstractVehicle : IDrivable
     {
+        //Virtual - En metod som markeras med nykelordet virtual är ok att skriva en ny implementation i  ärvda klasser
         public virtual string Drive(double distance)
         {
             return $"{this.GetType().Name} wants to drive for {distance}";
         }
 
+        //Håller ingen implementation måste implementeras i ärvda klasser
         public abstract string Turn();
     }
 
-   public class Vehicle : AbstractVehicle
+    //Vehicle ärver från AbstractVehicle
+    public class Vehicle : AbstractVehicle
     {
+        //Som private men tillgänglig i subklasser
         protected int someValue;
         public string Brand { get; set; }
         public string RegNo { get; set; }
 
+        //regno har ett defaultvärde om vi inte skickar in något blir regno "Abc123"
         public Vehicle(string brand, string regno = "Abc123")
         {
             Brand = brand;
             RegNo = regno;
         }
 
+        //Overide egen implementation av Turn
         public override string Turn()
         {
             return "Vehicle turns";
         }
 
-        public override string Drive(double distance)
-        {
-            return base.Drive(distance);
-        }
+        //Nyckelordet sealed låser metoden från att overriadas längre
+        //public sealed override string Drive(double distance)
+        //{
+        //    return base.Drive(distance);
+        //}
     }
 
     public class FuelVehicle : Vehicle
     {
+        //Privat fält
         private double fuelLevel;
 
-        public double FuelLevel 
+        //Property, när vi skriver kod i get och set behöver vi skriva ut det bakomliggande fältet
+        public double FuelLevel
         {
             get
             {
@@ -62,8 +82,10 @@ namespace OOP
             }
         }
 
-
+        //Property med enbart geter
         public double Fuelcapacity { get; }
+
+        //Konstruktor, base i det här fallet Vehicle, Vi anropar Vehicles konstruktor
         public FuelVehicle(string brand, string regNo, double fuelcapacity) : base(brand, regNo)
         {
             Fuelcapacity = fuelcapacity;
@@ -73,6 +95,7 @@ namespace OOP
 
     public class FuelCar : FuelVehicle
     {
+        //Const kan inte ändras när värdet är satt. Måste sätta värdet direkt!
         private const double fuelConsumption = 0.5;
         public double MaxDistance // => FuelLevel / fuelConsumption;
         {
@@ -82,9 +105,10 @@ namespace OOP
             }
         }
 
-        public FuelCar() :  this("DefaultBrandName", 100, "XXX555") { }
+        //Kedjade konstruktorer. base anropar basklassens konstruktor, this anropar den andra konstruktorn i klassen
+        public FuelCar() : this("DefaultBrandName", 100, "XXX555") {  }
 
-        public FuelCar(string brand, double fuelcapacity, string regno) : base(brand, regno, fuelcapacity){}
+        public FuelCar(string brand, double fuelcapacity, string regno) : base(brand, regno, fuelcapacity) { }
 
         public override string Drive(double distance)
         {
@@ -92,7 +116,7 @@ namespace OOP
 
             result.AppendLine(base.Drive(distance));
 
-            if(distance < 0)
+            if (distance < 0)
             {
                 distance = 0;
                 result.AppendLine("Negative distance is assumed to be 0");
@@ -106,7 +130,7 @@ namespace OOP
             return result.ToString();
         }
 
-        public string Sound()  => "Tut tut Greta!";
+        public string Sound() => "Tut tut Greta!";
         //{
         //    return "Tut tut";
         //}
