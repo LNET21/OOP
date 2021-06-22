@@ -7,7 +7,12 @@ using System.Threading.Tasks;
 namespace OOP
 {
 
-  public abstract class AbstractVehicle
+ public interface IDrivable
+    {
+        string Drive(double distance);
+    }
+
+  public abstract class AbstractVehicle : IDrivable
     {
         public virtual string Drive(double distance)
         {
@@ -36,11 +41,28 @@ namespace OOP
 
     public class FuelVehicle : Vehicle
     {
+        private double fuelLevel;
 
-        public FuelVehicle(string brand, string regNo) : base(brand, regNo)
+        public double FuelLevel 
         {
-           
+            get
+            {
+                return fuelLevel;
+            }
+            set
+            {
+                double newLevel = Math.Max(0, value);
+                fuelLevel = Math.Min(newLevel, Fuelcapacity);
+            }
         }
+
+
+        public double Fuelcapacity { get; }
+        public FuelVehicle(string brand, string regNo, double fuelcapacity) : base(brand, regNo)
+        {
+            Fuelcapacity = fuelcapacity;
+        }
+
 
         //public override  string Drive(double distance)
         //{

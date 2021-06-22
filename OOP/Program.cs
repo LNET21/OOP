@@ -8,17 +8,17 @@ namespace OOP
         static void Main(string[] args)
         {
 
-            FuelVehicle fuelVehicle = new FuelVehicle("Volvo", "aaa333");
+            FuelVehicle fuelVehicle = new FuelVehicle("Volvo", "aaa333", 50);
             Vehicle vehicle = new Vehicle("Saab");
 
-            List<AbstractVehicle> vehicles = new List<AbstractVehicle>()
+            List<IDrivable> vehicles = new List<IDrivable>()
             {
                 fuelVehicle, vehicle, new Vehicle("Mazda")
             };
             vehicles.Add(new Vehicle("Audi"));
             vehicles.Add(new Bicycle());
 
-            foreach (AbstractVehicle v in vehicles)
+            foreach (var v in vehicles)
             {
                 Console.WriteLine(v.Drive(23));
             }
