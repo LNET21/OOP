@@ -39,10 +39,10 @@ namespace OOP
             return "Vehicle turns";
         }
 
-        //public override string Drive(double distance)
-        //{
-        //    return base.Drive(distance);
-        //}
+        public override string Drive(double distance)
+        {
+            return base.Drive(distance);
+        }
     }
 
     public class FuelVehicle : Vehicle
