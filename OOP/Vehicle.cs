@@ -31,6 +31,11 @@ namespace OOP
             return $"{this.GetType().Name} wants to drive for {distance}";
         }
 
+        public void Do()
+        {
+            Console.WriteLine("Hej");
+        }
+
         //Håller ingen implementation måste implementeras i ärvda klasser
         public abstract string Turn();
     }
@@ -48,6 +53,13 @@ namespace OOP
         {
             Brand = brand;
             RegNo = regno;
+           
+        }
+
+        public  override string Drive(double distance)
+        {
+            base.Drive(23);
+            return "Hej";
         }
 
         //Overide egen implementation av Turn

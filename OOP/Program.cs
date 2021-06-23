@@ -7,6 +7,11 @@ namespace OOP
     {
         static void Main(string[] args)
         {
+            IDrivable volvo = new FuelCar();
+            Vehicle volvo2 = new FuelCar();
+            AbstractVehicle volvo3 = new FuelCar();
+
+            
 
             FuelCar car = new FuelCar();
 
@@ -25,6 +30,7 @@ namespace OOP
 
             foreach (var v in vehicles)
             {
+                Console.WriteLine(v.Drive(45));
                 //Unsafe cast, Exception om inte casten lyckas
                 //FuelCar fuelCar = (FuelCar)v;
                 //Console.WriteLine(fuelCar.Brand);
